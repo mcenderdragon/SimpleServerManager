@@ -1,4 +1,5 @@
 /.settings
+/server
 *.jar
 /bin
 .classpath
