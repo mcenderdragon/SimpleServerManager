@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <anything repeat="true">
-	<task>
-		<start>update.bat</start>
-	</task>
-	<task time="604800" cron="0 3 * * 0">
+	<task time="604800" cron="0 3 * * 1">
 		<start>launchServer.bat</start>
-		<stop>say Updating Server\r\nstop</stop>
+		<stop>say Restarting Server and searching for updates</stop>
+		<stop>stop</stop>
 		<task trigger="failure">
 			<start>error_log.bat</start>
 		</task>
