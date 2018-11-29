@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<anything repeat="true">
+<anything repeat="false">
 	<task time="604800" cron="0 3 * * 1">
 		<start>launchServer.bat</start>
 		<stop>say Restarting Server and searching for updates</stop>

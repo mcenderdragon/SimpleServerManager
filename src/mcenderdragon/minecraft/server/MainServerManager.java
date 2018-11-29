@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import javax.xml.parsers.DocumentBuilder;
@@ -36,7 +37,9 @@ public class MainServerManager
 		System.out.println("Using config file (first param):" + config);
 		try
 		{
+			
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			
 			Document doc = builder.parse(new File(config));
 			Element root = doc.getDocumentElement();
 		   
@@ -69,10 +72,13 @@ public class MainServerManager
 				}
 				++i;
 			}
-			do {
+			
+			do
+			{
 				taks.forEach(Runnable::run);
 				taks.forEach(t -> t.reset());
-			} while (repeat);
+			}
+			while (repeat);
 		}
 		catch (FileNotFoundException e) {
 			System.out.println(e);
@@ -278,6 +284,7 @@ public class MainServerManager
 				return this.process;
 			}
 			ProcessBuilder builder = new ProcessBuilder(this.start_command.split(" "));
+			builder.environment().put("MSYSTEM", "MINGW-managment");//this is to disable jline support; if jline is active it will crash later on and we cant communicate with the server
 			builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
 			builder.redirectError(ProcessBuilder.Redirect.INHERIT);
 			builder.redirectInput(this.wait_until_exit ? ProcessBuilder.Redirect.INHERIT : ProcessBuilder.Redirect.PIPE);
